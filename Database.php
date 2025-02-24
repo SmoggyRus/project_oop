@@ -8,7 +8,10 @@ class Database
     private $pdo, $query, $error = false, $results, $count;
     private function __construct(){
         try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=project-oop', 'root', '');
+            $this->pdo = new PDO("mysql:host=" . Config::get('mysql.host') . ";
+            dbname="  . Config::get('mysql.database'),
+            Config::get('mysql.user'),
+            Config::get('mysql.password'));
         } catch(PDOException $exception) {
             die($exception->getMessage());
         }

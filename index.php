@@ -1,5 +1,15 @@
 <?php
 require_once 'Database.php';
+require_once 'Config.php';
+
+$GLOBALS['config'] = [
+    'mysql' => [
+        'host' => 'localhost',
+        'user' => 'root',
+        'password' => '',
+        'database' => 'project-oop'
+    ]
+];
 
 //$users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe','Jane Koe']);
 //$users = Database::getInstance()->get('users', ['password', '=', 'password1']);
