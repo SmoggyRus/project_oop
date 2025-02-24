@@ -21,6 +21,21 @@ class Database
         return self::$instance;
     }
 
+    // Геттеры, чтобы получить доступ к статическим свойствам
+    public function error()
+    {
+        return $this->error;
+    }
+
+    public function results()
+    {
+        return $this->results;
+    }
+
+    public function count()
+    {
+        return $this->count;
+    }
     public function query($sql, $params = [])
     {
         $this->error = false;
@@ -42,21 +57,6 @@ class Database
         }
 
         return $this;
-    }
-    // Геттеры, чтобы получить доступ к статическим свойствам
-    public function error()
-    {
-        return $this->error;
-    }
-
-    public function results()
-    {
-        return $this->results;
-    }
-
-    public function count()
-    {
-        return $this->count;
     }
     public function get($table,$where = [])
     {
@@ -88,6 +88,21 @@ class Database
 
         }
 
+        return false;
+    }
+
+    public function insert($table, $fields = [])
+    {
+        $values = '';
+        foreach ($fields as $field) {
+            $values .= "?,";
+        }
+        $values = rtrim($values, ',');
+
+        $sql = "INSERT INTO {$table} (`" . implode('`, `', array_keys($fields)) . "`) VALUES (" . $values . ")";
+        if (!$this->query($sql, $fields)->error()) {
+            return true;
+        }
         return false;
     }
 }
