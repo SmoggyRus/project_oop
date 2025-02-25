@@ -32,18 +32,21 @@ $GLOBALS['config'] = [
 if (Input::exists()) {
     $validate = new Validate();
 
-$validation = $validate->check($_POST, [
+    $validation = $validate->check($_POST, [
         'username' => [
+            'display' => "Никнейм",
             'required' => true,
             'min' => 2,
             'max' => 15,
             'unique' => 'users'
         ],
         'password' => [
+            'display' => "Пароль",
             'required' => true,
             'min' => 3,
         ],
         'password_again' => [
+            'display' => "Повторите пароль",
             'required' => true,
             'matches' => 'password'
         ]
