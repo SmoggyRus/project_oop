@@ -43,12 +43,17 @@ class Validate
                             if ($check->count()) {
                                 $this->addError("{$display} уже существует");
                             }
-                        break;
+                            break;
+                        case 'email':
+                            if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                                $this->addError("Введён некорректный {$display} адрес");
+                            }
+                            break;
                     }
                 }
             }
         }
-        if(empty($this->errors)) {
+        if (empty($this->errors)) {
             $this->passed = true;
         }
         return $this;

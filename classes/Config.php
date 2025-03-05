@@ -17,15 +17,3 @@ class Config {
         return false;
     }
 }
-
-$GLOBALS['config'] = [
-    'mysql' => [
-        'host' => 'localhost',
-        'user' => 'root',
-        'password' => '',
-        'database' => 'project-oop'
-    ],
-    'session' => [
-        'token_name' => 'token',
-    ]
-];
