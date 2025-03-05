@@ -49,7 +49,8 @@ if (Input::exists()) {
 
 
         if ($validation->passed()) {
-            echo 'Валидация прошла!';
+            Session::flash('success','Регистрация успешна!');
+//            header('Location: /test.php');
         } else {
             foreach ($validation->errors() as $error) {
                 echo $error . "</br>";
@@ -68,66 +69,99 @@ if (Input::exists()) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Главная</title>
     <style>
-        /* Стиль для body */
         body {
             margin: 0;
-            height: 100vh; /* Высота на весь экран */
-            display: grid; /* Активируем Grid */
-            place-items: center; /* Одновременное центрирование по горизонтали и вертикали */
-            background-color: #f4f4f9; /* Фоновый цвет */
-            font-family: Arial, sans-serif; /* Шрифт */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f2f5;
+            font-family: "Segoe UI", system-ui, sans-serif;
         }
 
-        /* Стиль для формы */
         form {
-            background-color: #ffffff; /* Белый фон формы */
-            padding: 20px; /* Внутренние отступы */
-            border-radius: 8px; /* Закругленные углы */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для объема */
-            width: 300px; /* Ширина формы */
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            width: 320px;
+            padding: 25px 20px;
+            box-sizing: border-box; /* Добавлено */
         }
 
-        /* Стиль для блоков field */
         .field {
-            margin-bottom: 15px; /* Отступ между полями */
+            margin-bottom: 18px;
         }
 
-        /* Стиль для меток */
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
-        /* Стиль для полей ввода */
-        input[type="text"] {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
             font-size: 14px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box; /* Добавлено */
+            margin: 0; /* Добавлено */
         }
 
-        /* Стиль для кнопки */
+        input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+        }
+
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff; /* Синий фон */
-            color: white; /* Белый текст */
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 11px 16px;
+            background: #6366f1;
+            border: 0;
+            border-radius: 6px;
+            font-size: 15px;
+            color: white;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            box-sizing: border-box; /* Добавлено */
         }
 
-        /* Стиль для кнопки при наведении */
         button:hover {
-            background-color: #0056b3; /* Темно-синий фон */
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Фикс для автозаполнения */
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+            -webkit-text-fill-color: #333;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 360px) {
+            form {
+                width: 100%;
+                max-width: 320px;
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
 <body>
 <form action="" method="post">
+    <p><?=Session::flash('success')?></p>
     <div class="field">
         <label for="username">Никнейм</label>
         <input type="text" name="username" class="text" value="<?= Input::get('username') ?>">
@@ -135,12 +169,12 @@ if (Input::exists()) {
 
     <div class="field">
         <label for="">Пароль</label>
-        <input type="text" name="password">
+        <input type="password" name="password">
     </div>
 
     <div class="field">
         <label for="">Повторите пароль</label>
-        <input type="text" name="password_again">
+        <input type="password" name="password_again">
     </div>
 
     <input type="hidden" name="token" value="<?=Token::generate();?>">
