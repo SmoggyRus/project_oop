@@ -24,5 +24,8 @@ $GLOBALS['config'] = [
         'user' => 'root',
         'password' => '',
         'database' => 'project-oop'
+    ],
+    'session' => [
+        'token_name' => 'token',
     ]
 ];
