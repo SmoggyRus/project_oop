@@ -4,16 +4,6 @@ require_once 'Config.php';
 require_once 'Validate.php';
 require_once 'Input.php';
 
-
-$GLOBALS['config'] = [
-    'mysql' => [
-        'host' => 'localhost',
-        'user' => 'root',
-        'password' => '',
-        'database' => 'project-oop'
-    ]
-];
-
 //$users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe','Jane Koe']);
 //$users = Database::getInstance()->get('users', ['password', '=', 'password1']);
 //$users = Database::getInstance()->delete('users', ['username', '=', 'Jane Koe']);
@@ -32,7 +22,7 @@ $GLOBALS['config'] = [
 if (Input::exists()) {
     $validate = new Validate();
 
-    $validation = $validate->check($_POST, [
+    $validation = $validate->check($_POST,        [
         'username' => [
             'display' => "Никнейм",
             'required' => true,
@@ -54,7 +44,7 @@ if (Input::exists()) {
 
 
     if ($validation->passed()) {
-        echo 'passed';
+        echo 'Валидация прошла!';
     } else {
         foreach ($validation->errors() as $error) {
             echo $error . "</br>";
