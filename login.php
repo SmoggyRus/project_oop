@@ -15,7 +15,7 @@ if(Input::exists()) {
 
             $login = $user->login(Input::get('email'), Input::get('password'));
             if($login) {
-                echo 'Успешно авторизован!';
+                Redirect::to('index.php');
             } else {
                 echo 'Ошибка авторизации!';
             }
