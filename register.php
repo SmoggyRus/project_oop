@@ -59,101 +59,12 @@ if (Input::exists()) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Главная</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f0f2f5;
-            font-family: "Segoe UI", system-ui, sans-serif;
-        }
-
-        form {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            width: 320px;
-            padding: 25px 20px;
-            box-sizing: border-box; /* Добавлено */
-        }
-
-        .field {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 13px;
-            color: #333;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-sizing: border-box; /* Добавлено */
-            margin: 0; /* Добавлено */
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
-        }
-
-        button {
-            width: 100%;
-            padding: 11px 16px;
-            background: #6366f1;
-            border: 0;
-            border-radius: 6px;
-            font-size: 15px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 8px;
-            box-sizing: border-box; /* Добавлено */
-        }
-
-        button:hover {
-            background: #4f46e5;
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        /* Фикс для автозаполнения */
-        input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0px 1000px white inset;
-            -webkit-text-fill-color: #333;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 360px) {
-            form {
-                width: 100%;
-                max-width: 320px;
-                padding: 20px 15px;
-            }
-        }
-    </style>
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <form action="" method="post">
-    <p><?=Session::flash('success')?></p>
+    <span><?=Session::flash('success')?></span>
     <div class="field">
         <label for="username">Никнейм</label>
         <input type="text" name="username" class="text" value="<?= Input::get('username') ?>">
