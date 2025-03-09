@@ -36,7 +36,7 @@ class User {
         }
     }
 
-    public function find($value = null) {
+    public function find($value = null) { // Обертка
         if(is_numeric($value)) {
             $this->data = $this->db->get('users', ['id', '=', $value])->first();
         } else {
@@ -54,5 +54,9 @@ class User {
 
     public function isLoggedIn() {
         return $this->isLoggedIn;
+    }
+
+    public function logout() {
+        Session::delete($this->session_name);
     }
 }
