@@ -1,9 +1,10 @@
 <?php
 class User {
-    private $db, $data;
+    private $db, $data, $session_name;
 
     public function __construct() {
         $this->db = Database::getInstance();
+        $this->session_name = Config::get('session.user_session');
     }
 
     public function create($fields = []) {
@@ -14,7 +15,7 @@ class User {
         if($email) {
             $user = $this->find($email);
             if (password_verify($password, $this->getData()->password)){
-                Session::put('user_id', $this->getData()->id);
+                Session::put($this->session_name, $this->getData()->id);
                 return true;
             }
             return false;
