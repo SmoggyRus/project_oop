@@ -9,6 +9,7 @@ require_once 'classes/Token.php';
 require_once 'classes/Session.php';
 require_once 'classes/User.php';
 require_once 'classes/Redirect.php';
+require_once 'classes/Cookie.php';
 
 $GLOBALS['config'] = [
     'mysql' => [
@@ -17,23 +18,25 @@ $GLOBALS['config'] = [
         'password' => '',
         'database' => 'project-oop'
     ],
+
     'session' => [
         'token_name' => 'token',
-        'user_session' => ' user_id'
+        'user_session' => ' user'
+    ],
+
+    'cookie' => [
+        'cookie_name' => 'hash',
+        'cookie_expiry' => 604800, // будет храниться неделю
     ]
+
 ];
 
-//$users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe','Jane Koe']);
-//$users = Database::getInstance()->get('users', ['password', '=', 'password1']);
-//$users = Database::getInstance()->delete('users', ['username', '=', 'Jane Koe']);
+if(Cookie::exists(Config::get('cookie.cookie_name')) && !Session::exists(Config::get('session.user_session'))) {
+    $hash = Cookie::get(Config::get('cookie.cookie_name'));
+    $hashCheck = Database::getInstance()->get('user_sessions', ['hash', '=', $hash]);
 
-//$id = 3;
-//Database::getInstance()->update('users', $id , [
-//        'username' => 'Ruslan2',
-//        'password' => 'password2'
-//    ]);
-
-
-//$users = Database::getInstance()->get('users', ['id', '=', '3']);
-//
-//echo $users->first()->username;
+    if ($hashCheck->count()) {
+        $user = new User($hashCheck->first()->user_id);
+        $user->login();
+    }
+}

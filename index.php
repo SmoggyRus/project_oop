@@ -4,10 +4,10 @@ require_once 'init.php';
 //var_dump(Session::get(Config::get('session.user_session')));
 
 $user = new User();
-$anotherUser = new User(4);
 if ($user->isLoggedIn()) {
-    echo "Hi, <a href='logout.php'>{$user->getData()->username}</a>";
-    echo "<p><a href='logout.php'>Logout</a></p>";
+    echo "Привет, <a href='logout.php'>{$user->data()->username}</a>";
+    echo "<p><a href='logout.php'>Выйти</a></p>";
 } else {
-    echo "<a href='login.php'>Login</a> or <a href='register.php'>Register</a>";
+    echo "<a href='login.php'>Войти</a> или <a href='register.php'>Зарегистрироваться</a>";
 }
+?>
