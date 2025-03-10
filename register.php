@@ -42,7 +42,6 @@ if (Input::exists()) {
             ]);
 
             Session::flash('success', 'Регистрация успешна!');
-            //Redirect::to('test.php');
         } else {
             foreach ($validation->errors() as $error) {
                 echo $error . "</br>";

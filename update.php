@@ -20,7 +20,7 @@ if (Input::exists()) {
             $user->update([
                 'username' => Input::get('username')
             ]);
-
+            Session::flash('success','Данные успешно обновлены!');
             Redirect::to('index.php');
         } else {
             foreach ($validation->errors() as $error) {
@@ -50,7 +50,7 @@ if (Input::exists()) {
 
     <input type="hidden" name="token" value="<?=Token::generate()?>">
     <div class="field">
-        <button type="submit">Войти</button>
+        <button type="submit">Изменить</button>
     </div>
 </form>
 </body>

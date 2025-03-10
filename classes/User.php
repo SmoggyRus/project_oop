@@ -13,8 +13,6 @@ class User {
 
                 if ($this->find($user)) {
                     $this->isLoggedIn = true;
-                } else {
-                    //Logout
                 }
             }
         } else {
