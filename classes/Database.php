@@ -115,7 +115,7 @@ class Database
             $set .= "{$key} = ?,"; // username = ?, password =?,
          }
 
-        $set = rtrim($set, ','); // удалить лишнюю запятную в конце
+        $set = rtrim($set, ','); // удалить лишнюю запятую в конце
 
         $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
 
