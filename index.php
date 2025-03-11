@@ -8,6 +8,11 @@ if ($user->isLoggedIn()) {
     echo "<p><a href='logout.php'>Выйти</a></p>";
     echo "<p><a href='update.php'>Редактировать данные</a></p>";
     echo "<p><a href='changepassword.php'>Сменить пароль</a></p>";
+
+    if ($user->hasPermissions('admin')) {
+        echo "Вы администратор!";
+//        echo "Вы модератор!";
+    }
 } else {
     echo "<a href='login.php'>Войти</a> или <a href='register.php'>Зарегистрироваться</a>";
 }

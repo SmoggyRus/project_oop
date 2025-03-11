@@ -84,12 +84,30 @@ class User {
     }
 
     public function logout() {
+        $this->db->delete("user_sessions", ['user_id', '=', $this->data()->id]);
         Session::delete($this->session_name);
         Cookie::delete($this->cookieName);
     }
 
-    public function exists() {
+    public function exists(): bool
+    {
         return (!empty($this->data())) ? true : false;
     }
+
+    public function hasPermissions($key = null) {
+
+        $group = $this->db->get('groups', ['id', '=', $this->data()->group_id]);
+
+        if ($group->count()) {
+           $permissions = $group->first()->permissions;
+           $permissions = json_decode($permissions, true);
+
+           if($permissions[$key]){
+               return true;
+           }
+           return false;
+        }
+    }
+
 
 }
